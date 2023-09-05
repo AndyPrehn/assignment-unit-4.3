@@ -3,8 +3,52 @@ console.log('***** Cart Functions *****');
 // We want to see how you are testing your code!!!
 let basket = [];
 
-function addItem() {
-    basket.push('Kale');
+let basketList = document.querySelector('#basket');
+// Adding items to the basket
+function addItem(item, basketArray) {
+    if (isFull()) {
+    basketArray.push(item);
+    listItems(basketArray);
+    return true;
+    } else {
+        basketList.innerHTML += `<h3>Your basket is full! ${item} was not added to the basket.<h3>`
+        console.log(`Your basket is full, ${item} was not added to the basket`);
+        return false;
+    }
+};
+// Filling the basket with groceries, one at a time
+console.log(`Adding milk to the basket, ${addItem('milk', basket)}`);
+console.log(`Adding cereal to the basket, ${addItem('cereal', basket)}`);
+console.log(`Basket is now ${basket}`);
+
+
+// List items in cart
+// Function also updates the page each time the basket is changed.
+function listItems(basketArray) {
+    if (basketArray.length > 0) {
+        basketList.innerHTML = '<h3>Here are the items in your basket</h3>';
+        console.log('Here are the items in your basket!');
+        for (let item of basketArray) {
+            basketList.innerHTML += '<li>' + item + '</li>' 
+            console.log(item);
+    }} 
+    else {
+        basketList.innerHTML = '<h3>There is nothing in your basket</h3>'
+        console.log('Your basket has nothing in it!');
+    }
+}
+
+listItems(basket);
+
+// empties the basket
+function empty(basketArray) {
+    if (basketArray.length > 0) {
+        console.log('The basket is now empty');
+        basketArray.length = 0;
+        basketList.innerHTML = '<h3>There is nothing in your basket</h3>';
+    } else {
+        console.log('Your basket is already empty!');
+    }
 }
 
 
